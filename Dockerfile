@@ -1,11 +1,8 @@
-FROM python:3.12.4-buster
-
-RUN apt-get update -qq && apt-get -y install ffmpeg
-
-WORKDIR /usr/src/app
+FROM python:3.12-slim-buster
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
 
 COPY . .
 
-RUN pip install -U -r requirements.txt
-
-CMD [ "python", "-m", "bot" ]
+CMD python3 -m bot
